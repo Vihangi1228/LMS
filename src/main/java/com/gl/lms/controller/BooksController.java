@@ -64,11 +64,11 @@ public class BooksController {
     // Only ADMIN can delete books (Soft Delete)
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable Integer id,
-                                        Authentication authentication) {
+    public ResponseEntity<Void> deleteBook(@PathVariable Integer id) {
 
-        booksService.softDelete(id, authentication.getName());
-
-        return ResponseEntity.ok("Book soft deleted successfully");
+        booksService.softDelete(id);
+        return ResponseEntity.noContent().build();
     }
+
+
 }
